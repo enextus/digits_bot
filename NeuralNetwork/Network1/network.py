@@ -32,6 +32,20 @@ class Network(object): # used to describe a neural network;
         for b, w in zip(self.biases, self.weights):
             a = sigmoid(np.dot(w, a)+b) # computes the product of matrices
             return a
+    
+    # Stochastic gradient descent
+    def SGD(self, training_data, epochs, mini_batch_size, eta, test_data): # self - a pointer to the class object; training_data - training sample; epochs - number of training eras; mini_batch_size - sample size; eta - learning speed; test_data - test sample
+        test_data = list(test_data) # create a list of test sample objects
+        n_test = len(test_data) # calculate the length of the test sample
+        training_data = list(training_data) # create a list of training sample objects
+        n = len(training_data) # calculate the size of the training sample
+        for j in range(epochs): # cycle by epochs
+            random.shuffle(training_data) # mix the elements of the training sample
+            mini_batches = [training_data[k:k+mini_batch_size] for k in range(0, n, mini_batch_size)] #create subsamples
+            for mini_batch in mini_batches: # loop through subsamples
+                self.update_mini_batch(mini_batch, eta) # one step gradient descent
+            print ("Epoch {0}: {1} / {2}".format(j, self.evaluate(test_data), n_test)) # look at the progress in learning
+
 
 def sigmoid(z): # definition of sigmoidal activation function
     return 1.0/(1.0+np.exp(-z))
