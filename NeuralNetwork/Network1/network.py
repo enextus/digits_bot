@@ -57,9 +57,9 @@ class Network(object): # used to describe a neural network;
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)] # summarize dC / dw gradients for various use cases of the current subsample
         
         self.weights = [w-(eta/len(mini_batch))*nw
-            for w, nw in zip(self.weights, nabla_w)]
+                        for w, nw in zip(self.weights, nabla_w)] # we update all the weight "w" of the neural network
         self.biases = [b-(eta/len(mini_batch))*nb
-            for b, nb in zip(self.biases, nabla_b)]
+                        for b, nb in zip(self.biases, nabla_b)] # we update all the weight "b" of the neural network
 
 
 
