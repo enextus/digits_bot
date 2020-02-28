@@ -61,11 +61,55 @@ class Network(object): # used to describe a neural network;
         self.biases = [b-(eta/len(mini_batch))*nb
                         for b, nb in zip(self.biases, nabla_b)] # we update all the weight "b" of the neural network
 
+    # Backpropagation algorithm
+    def backprop(self, x, y): # pointer to the class object; vector of input signals; expected output vector
+        nabla_b = [np.zeros(b.shape) for b in self.biases] # list of dC / db gradients for each layer (initially filled with zeros)
+        nabla_w = [np.zeros(w.shape) for w in self.weights] # list of dC / dw gradients for each layer (initially filled with zeros)
+        
+        # определение переменных
+        activation = x # выходные сигналы слоя (первоначально соответствует выходным сигналам 1-го слоя или входным сигналам сети)
+        activations = [x] # список выходных сигналов по всем слоям (первоначально содержит только выходные сигналы 1-го слоя)
+        zs = [] # список активационных потенциалов по всем слоям (первоначально пуст)
+        
+        # прямое распространение
+        for b, w in zip(self.biases, self.weights):
+            z = np.dot(w, activation)+b # считаем активационные потенциалы текущего слоя
+            zs.append(z) # добавляем элемент (активационные потенциалы слоя) в конец списка
+            activation = sigmoid(z) # считаем выходные сигналы текущего слоя, применяя сигмоидальную функцию активации к активационным потенциалам слоя
+            activations.append(activation) # добавляем элемент (выходные сигналы слоя) в конец списка
 
+        # обратное распространение
+        delta = self.cost_derivative(activations[-1], y) * sigmoid_prime(zs[-1]) # считаем меру влияния нейронов выходного слоя L на величину ошибки (BP1)
+        nabla_b[-1] = delta # градиент dC/db для слоя L (BP3)
+        nabla_w[-1] = np.dot(delta, activations[-2].transpose()) # градиент dC/dw для слоя L (BP4)
 
+        for l in range(2, self.num_layers):
+            z = zs[-l] # активационные потенциалы l-го слоя (двигаемся по списку справа налево)
+            sp = sigmoid_prime(z) # считаем сигмоидальную функцию от активационных потенциалов l-го слоя
+            delta = np.dot(self.weights[-l+1].transpose(), delta) * sp # считаем меру влияния нейронов l-го слоя на величину ошибки (BP2)
+            nabla_b[-l] = delta # градиент dC/db для l-го слоя (BP3)
+            nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())# градиент dC/dw для l-го слоя (BP4)
+        return (nabla_b, nabla_w)
 
-def sigmoid(z): # definition of sigmoidal activation function
+    # Оценка прогресса в обучении
+    def evaluate(self, test_data): 
+        test_results = [(np.argmax(self.feedforward(x)), y)
+            for (x, y) in test_data]
+        return sum(int(x == y) for (x, y) in test_results)
+
+    # Вычисление частных производных стоимостной функции по выходным сигналам последнего слоя
+    def cost_derivative(self, output_activations, y):
+        return (output_activations-y)
+
+# definition of sigmoidal activation function
+def sigmoid(z): 
     return 1.0/(1.0+np.exp(-z))
+
+# Производная сигмоидальной функции
+def sigmoid_prime(z):
+    return sigmoid(z)*(1-sigmoid(z))
+
+
 
 """
 program start
