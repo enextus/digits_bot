@@ -46,6 +46,23 @@ class Network(object): # used to describe a neural network;
                 self.update_mini_batch(mini_batch, eta) # one step gradient descent
             print ("Epoch {0}: {1} / {2}".format(j, self.evaluate(test_data), n_test)) # look at the progress in learning
 
+    # Step gradient descent
+    def update_mini_batch(self, mini_batch, eta): # self - a pointer to the class object; subsample; learning speed; 
+        nabla_b = [np.zeros(b.shape) for b in self.biases] # list of dC / db gradients for each layer (initially filled with zeros)
+        nabla_w = [np.zeros(w.shape) for w in self.weights] # list of dC / db gradients for each layer (initially filled with zeros)
+
+        for x, y in mini_batch:
+            delta_nabla_b, delta_nabla_w = self.backprop(x, y) # compute the dC / db and dC / dw gradients layer by layer for the current use case (x, y)
+            nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)] # summarize dC / db gradients for various use cases of the current subsample
+            nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)] # summarize dC / dw gradients for various use cases of the current subsample
+        
+        self.weights = [w-(eta/len(mini_batch))*nw
+            for w, nw in zip(self.weights, nabla_w)]
+        self.biases = [b-(eta/len(mini_batch))*nb
+            for b, nb in zip(self.biases, nabla_b)]
+
+
+
 
 def sigmoid(z): # definition of sigmoidal activation function
     return 1.0/(1.0+np.exp(-z))
