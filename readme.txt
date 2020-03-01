@@ -1,5 +1,8 @@
-pip3.7 uninstall pytelegrambotapi
-pip3.7 uninstall telebot
+pip uninstall pytelegrambotapi
+pip uninstall telebot
 
-pip3.7 install telebot --user
-pip3.7 install pytelegrambotapi --user
+pip install telebot
+pip install pytelegrambotapi
+
+
+source /home/enextus/projects/digits_bot/digits-env/bin/activate
