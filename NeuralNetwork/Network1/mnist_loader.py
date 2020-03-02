@@ -8,7 +8,6 @@ def load_data():
     f.close() # закрываем файл
     return (training_data, validation_data, test_data)
 
-
 def load_data_wrapper():
     tr_d, va_d, te_d = load_data() # инициализация наборов данных в формате MNIST
     training_inputs = [np.reshape(x, (784, 1)) for x in tr_d[0]] # преобразование массивов размера 1 на 784 к массивам размера 784 на 1
@@ -20,30 +19,18 @@ def load_data_wrapper():
     test_data = zip(test_inputs, te_d[1]) # формируем набор тестовых данных из пар (x, y)
     return (training_data, validation_data, test_data)
 
-
-
 def vectorized_result(j):
     e = np.zeros((10, 1))
     e[j] = 1.0
     return e
 
-
 """
-
-Type "help", "copyright", "credits" or "license" for more information.
->>> import os
->>> os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network1')                              
->>> 
-
 import os
 os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network1')
 import mnist_loader
-
 training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 import network
 
 net = network.Network([784, 30, 10])
-
 net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
-
 """
