@@ -1,11 +1,9 @@
 pip uninstall pytelegrambotapi
 pip uninstall telebot
-
 pip install telebot
 pip install pytelegrambotapi
 
 source /home/enextus/projects/digits_bot/digits-env/bin/activate
-
 # start 
 
 import os
@@ -17,11 +15,11 @@ import network
 net = network.Network([784, 30, 10])
 net.SGD(training_data, 30, 10, 1.0, test_data=test_data)
 
-net = network.Network([784, 49, 10]) # 784/16=49
+# 784/16=49
+net = network.Network([784, 49, 10])
 
-
-1. 
-net = network.Network([784, 56, 10]) # 784/14=56
+1. # 784/14=56
+net = network.Network([784, 56, 10])
 net.SGD(training_data, 50, 10, 3.0, test_data=test_data)
 Epoch 0: 458 / 10000
 Epoch 1: 368 / 10000
@@ -55,3 +53,7 @@ Epoch 4: 599 / 10000
 Epoch 5: 577 / 10000
 Epoch 6: 597 / 10000
 Epoch 7: 584 / 10000
+
+3. 
+net = network.Network([784, 28, 10])
+net.SGD(training_data, 50, 10, 3.0, test_data=test_data)
