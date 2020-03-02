@@ -123,3 +123,114 @@ Epoch 8: 437 / 10000
 Epoch 9: 491 / 10000
 Epoch 10: 500 / 10000
 Epoch 11: 429 / 10000
+
+Epoch 43: 462 / 10000
+Epoch 44: 433 / 10000
+Epoch 45: 405 / 10000
+Epoch 46: 488 / 10000
+Epoch 47: 457 / 10000
+Epoch 48: 448 / 10000
+Epoch 49: 459 / 10000
+>>>
+
+
+>>> net = network.Network([784, 49, 10])
+>>> net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+Epoch 0: 283 / 10000
+Epoch 1: 476 / 10000
+Epoch 2: 447 / 10000
+Epoch 3: 491 / 10000
+Epoch 4: 480 / 10000
+Epoch 5: 540 / 10000
+Epoch 6: 606 / 10000
+Epoch 7: 589 / 10000
+Epoch 8: 628 / 10000
+Epoch 9: 556 / 10000
+Epoch 10: 601 / 10000
+Epoch 11: 573 / 10000
+Epoch 12: 625 / 10000
+Epoch 13: 563 / 10000
+Epoch 14: 579 / 10000
+Epoch 15: 614 / 10000
+Epoch 16: 649 / 10000
+Epoch 17: 609 / 10000
+Epoch 18: 563 / 10000
+Epoch 19: 573 / 10000
+Epoch 20: 578 / 10000
+Epoch 21: 589 / 10000
+Epoch 22: 581 / 10000
+Epoch 23: 613 / 10000
+Epoch 24: 571 / 10000
+Epoch 25: 576 / 10000
+Epoch 26: 586 / 10000
+Epoch 27: 568 / 10000
+Epoch 28: 585 / 10000
+Epoch 29: 584 / 10000
+>>>
+
+
+>>> net = network.Network([784, 49, 10])
+>>> net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+Epoch 0: 143 / 10000
+Epoch 1: 235 / 10000
+Epoch 2: 291 / 10000
+Epoch 3: 339 / 10000
+Epoch 4: 398 / 10000
+Epoch 5: 369 / 10000
+Epoch 6: 360 / 10000
+Epoch 7: 413 / 10000
+Epoch 8: 384 / 10000
+Epoch 9: 397 / 10000
+Epoch 10: 456 / 10000
+Epoch 11: 415 / 10000
+Epoch 12: 395 / 10000
+Epoch 13: 434 / 10000
+Epoch 14: 407 / 10000
+Epoch 15: 408 / 10000
+Epoch 16: 457 / 10000
+Epoch 17: 441 / 10000
+Epoch 18: 398 / 10000
+Epoch 19: 418 / 10000
+Epoch 20: 418 / 10000
+Epoch 21: 427 / 10000
+Epoch 22: 426 / 10000
+Epoch 23: 402 / 10000
+Epoch 24: 422 / 10000
+Epoch 25: 389 / 10000
+Epoch 26: 435 / 10000
+Epoch 27: 448 / 10000
+Epoch 28: 454 / 10000
+Epoch 29: 432 / 10000
+
+>>> net = network.Network([784, 100, 10])
+>>> net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+Epoch 0: 86 / 10000
+Epoch 1: 139 / 10000
+Epoch 2: 86 / 10000
+Epoch 3: 109 / 10000
+Epoch 4: 152 / 10000
+Epoch 5: 107 / 10000
+Epoch 6: 136 / 10000
+Epoch 7: 105 / 10000
+Epoch 8: 102 / 10000
+Epoch 9: 93 / 10000
+Epoch 10: 78 / 10000
+Epoch 11: 88 / 10000
+Epoch 12: 87 / 10000
+Epoch 13: 91 / 10000
+Epoch 14: 76 / 10000
+Epoch 15: 115 / 10000
+Epoch 16: 112 / 10000
+Epoch 17: 98 / 10000
+Epoch 18: 85 / 10000
+Epoch 19: 87 / 10000
+Epoch 20: 95 / 10000
+Epoch 21: 111 / 10000
+Epoch 22: 118 / 10000
+Epoch 23: 115 / 10000
+Epoch 24: 115 / 10000
+Epoch 25: 111 / 10000
+Epoch 26: 114 / 10000
+Epoch 27: 118 / 10000
+Epoch 28: 125 / 10000
+Epoch 29: 125 / 10000
