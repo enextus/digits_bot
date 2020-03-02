@@ -93,8 +93,7 @@ class Network(object): # used to describe a neural network;
 
     # Оценка прогресса в обучении
     def evaluate(self, test_data): 
-        test_results = [(np.argmax(self.feedforward(x)), y)
-            for (x, y) in test_data]
+        test_results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in test_results)
 
     # Вычисление частных производных стоимостной функции по выходным сигналам последнего слоя
@@ -107,7 +106,7 @@ def sigmoid(z):
 
 # Производная сигмоидальной функции
 def sigmoid_prime(z):
-    return sigmoid(z)*(1-sigmoid(z))
+    return sigmoid(z) * (1-sigmoid(z))
 
 
 
