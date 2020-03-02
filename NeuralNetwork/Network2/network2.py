@@ -247,7 +247,11 @@ def vectorized_result(j):
 
 """
 import os
+
 os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network2')
+
+os.chdir ('/home/enextus/projects/digits_bot/NeuralNetwork/Network2')
+
 import mnist_loader
 training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 import network2
