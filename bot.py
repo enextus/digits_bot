@@ -1,4 +1,10 @@
 # PowerShell -> Set-ExecutionPolicy Unrestricted
+# https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/
+
+# source /home/enextus/projects/digits_bot/digits-env/bin/activate
+
+
+# telegram bot
 
 import os
 import time
@@ -6,7 +12,7 @@ import config
 import random
 
 import telebot
-from telebot import types  # "pip install pytelegrambotapi" required!
+from telebot import types
 
 import decorator
 
