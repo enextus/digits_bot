@@ -1,10 +1,10 @@
-# network2.py
 # A module for creating and training a neural network for handwritten digit 
 # recognition based on the stochastic gradient descent method for 
 # a direct neural network and cost function based on cross entropy, 
 # regularization and an improved method of initializing neural network weights.
 
-#### Библиотеки
+# Программа создает и обучающает нейронную сеть для распознавания рукописных цифр
+# с использованием метода градиентного спуска и стоимостной функции на основе перекрестной энтропии.
 
 # Стандартные библиотеки
 import json # библиотека для кодирования/декодирования данных/объектов Python
@@ -54,12 +54,16 @@ class Network(object):
 
     # метод инициализации начальных весов связей и смещений
     def default_weight_initializer(self):
+        np.random.seed()
         self.biases = [np.random.randn(y, 1) for y in self.sizes[1:]] # задаем случайные начальные смещения
+        np.random.seed()
         self.weights = [np.random.randn(y, x)/np.sqrt(x)
         for x, y in zip(self.sizes[:-1], self.sizes[1:])] # задаем случайные начальные веса связей
 
     def large_weight_initializer(self):
+        np.random.seed()
         self.biases = [np.random.randn(y, 1) for y in self.sizes[1:]] # задаем случайные начальные смещения
+        np.random.seed()
         self.weights = [np.random.randn(y, x)
         for x, y in zip(self.sizes[:-1], self.sizes[1:])] # задаем случайные начальные веса
 
@@ -237,39 +241,34 @@ def vectorized_result(j):
 
 # Конец раздела описаний
 
-"""
-import os
+# import os
 
-os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network2')
+# os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network2')
+# os.chdir ('/home/enextus/projects/digits_bot/NeuralNetwork/Network2')
 
-os.chdir ('/home/enextus/projects/digits_bot/NeuralNetwork/Network2')
+# import mnist_loader
+# training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+# import network2
 
-import mnist_loader
-training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-import network2
+# net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost)
 
-net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost)
+# net.SGD(training_data, 30, 10, 0.5, lmbda = 5.0, evaluation_data=validation_data, monitor_evaluation_accuracy=True, monitor_evaluation_cost=True, monitor_training_accuracy=True, monitor_training_cost=True)
 
-net.SGD(training_data, 30, 10, 0.5, lmbda = 5.0, evaluation_data=validation_data, monitor_evaluation_accuracy=True, monitor_evaluation_cost=True, monitor_training_accuracy=True, monitor_training_cost=True)
+# (digits-env) PS C:\projects\digits_bot> python
+# Python 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)] on win32
+# Type "help", "copyright", "credits" or "license" for more information.
+# >>> import os
+# >>> os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network2')
+# >>> import mnist_loader
+# >>> training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+# >>> import network2
+# >>> net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost)
+# >>> net.SGD(training_data, 30, 10, 0.5, lmbda = 5.0, evaluation_data=validation_data, monitor_evaluation_accuracy=True, monitor_evaluation_cost=True, monitor_training_accuracy=True, monitor_training_cost=True)
 
-
-(digits-env) PS C:\projects\digits_bot> python
-Python 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
->>> import os
->>> os.chdir ('C:\\projects\\digits_bot\\NeuralNetwork\\Network2')
->>> import mnist_loader
->>> training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
->>> import network2
->>> net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost)
->>> net.SGD(training_data, 30, 10, 0.5, lmbda = 5.0, evaluation_data=validation_data, monitor_evaluation_accuracy=True, monitor_evaluation_cost=True, monitor_training_accuracy=True, monitor_training_cost=True)
-
-Epoch 29 training complete
---Cost on training data: 0.4215109798004295
---Accuracy on training data: 48111 / 50000
---Cost on evaluation data: 0.9972704678720175
---Accuracy on evaluation data: 9543 / 10000
-([0.7659381061262848, 0.8958750766326404, 0.8993574892780825, 0.9138976926147879, 0.9353782893231701, 0.9421021662472364, 0.9212886398947676, 1.0001777812834693, 0.9490907076029371, 0.9672822466195041, 0.9627870878251531, 0.9774468098658462, 0.9791761024862768, 0.9969993190418316, 0.9944257171175015, 0.9847690510087352, 0.9637007826052297, 0.9569530411865643, 0.9665283027057314, 0.9675845652723559, 0.9560775340465058, 0.9654351001986361, 0.9506181676887475, 0.9883998884013134, 0.9885262394377196, 0.9910974473215092, 1.0078793280349707, 0.9787794807047588, 0.983212813792939, 0.9972704678720175], [9451, 9406, 9486, 9530, 9514, 9528, 9601, 9488, 9577, 9550, 9564, 9559, 9557, 9531, 9515, 9562, 9594, 9614, 9583, 9573, 9599, 9586, 9620, 9557, 9553, 9539, 9503, 9547, 9578, 9543], [0.46336306112813624, 0.49049852640338903, 0.44066759950746875, 0.42663977297701433, 0.4240577946322011, 0.42101247034650763, 0.3941725447508594, 0.4563447997870543, 0.39455560561498804, 0.40326702379449814, 0.4028579769570545, 0.41344738510902057, 0.41202962278879635, 0.41791735476978, 0.41675799095126786, 0.39941464918366465, 0.381651450966655, 0.36556770721319676, 0.3829362769847325, 0.37707103533173536, 0.3691253949448845, 0.38284935692240374, 0.3618803883382167, 0.3996338283341886, 0.39803435703240025, 0.40413335680935736, 0.41491007748043796, 0.3905182241035583, 0.38625085208267596, 0.4215109798004295], [47180, 47170, 47630, 47778, 47875, 47900, 48223, 47615, 48264, 48180, 48227, 48051, 48194, 48061, 48062, 48192, 48369, 48403, 48272, 48427, 48451, 48409, 48522, 48228, 48260, 48151, 48035, 48199, 48284, 48111])
->>>
-
-"""
+# Epoch 29 training complete
+# --Cost on training data: 0.4215109798004295
+# --Accuracy on training data: 48111 / 50000
+# --Cost on evaluation data: 0.9972704678720175
+# --Accuracy on evaluation data: 9543 / 10000
+# ([0.7659381061262848, 0.8958750766326404, 0.8993574892780825, 0.9138976926147879, 0.9353782893231701, 0.9421021662472364, 0.9212886398947676, 1.0001777812834693, 0.9490907076029371, 0.9672822466195041, 0.9627870878251531, 0.9774468098658462, 0.9791761024862768, 0.9969993190418316, 0.9944257171175015, 0.9847690510087352, 0.9637007826052297, 0.9569530411865643, 0.9665283027057314, 0.9675845652723559, 0.9560775340465058, 0.9654351001986361, 0.9506181676887475, 0.9883998884013134, 0.9885262394377196, 0.9910974473215092, 1.0078793280349707, 0.9787794807047588, 0.983212813792939, 0.9972704678720175], [9451, 9406, 9486, 9530, 9514, 9528, 9601, 9488, 9577, 9550, 9564, 9559, 9557, 9531, 9515, 9562, 9594, 9614, 9583, 9573, 9599, 9586, 9620, 9557, 9553, 9539, 9503, 9547, 9578, 9543], [0.46336306112813624, 0.49049852640338903, 0.44066759950746875, 0.42663977297701433, 0.4240577946322011, 0.42101247034650763, 0.3941725447508594, 0.4563447997870543, 0.39455560561498804, 0.40326702379449814, 0.4028579769570545, 0.41344738510902057, 0.41202962278879635, 0.41791735476978, 0.41675799095126786, 0.39941464918366465, 0.381651450966655, 0.36556770721319676, 0.3829362769847325, 0.37707103533173536, 0.3691253949448845, 0.38284935692240374, 0.3618803883382167, 0.3996338283341886, 0.39803435703240025, 0.40413335680935736, 0.41491007748043796, 0.3905182241035583, 0.38625085208267596, 0.4215109798004295], [47180, 47170, 47630, 47778, 47875, 47900, 48223, 47615, 48264, 48180, 48227, 48051, 48194, 48061, 48062, 48192, 48369, 48403, 48272, 48427, 48451, 48409, 48522, 48228, 48260, 48151, 48035, 48199, 48284, 48111])
+# >>>
